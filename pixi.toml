@@ -1,0 +1,213 @@
+[workspace]
+authors = ["rjeye <43903059+rjeye@users.noreply.github.com>"]
+channels = ["conda-forge"]
+name = "mast3r-nav"
+platforms = ["linux-64"]
+version = "0.1.0"
+
+[activation]
+scripts = ["scripts/activate.sh"]
+
+[tasks]
+map = "python -m libs.mapper.create_topomap"
+nav = "python run_nav.py"
+
+# Clone habitat-sim and habitat-lab
+clone-habitat = """
+(git clone https://github.com/facebookresearch/habitat-sim.git libs/habitat-sim && cd libs/habitat-sim && git checkout v0.2.4) || echo 'habitat-sim already cloned' && \
+(git clone https://github.com/facebookresearch/habitat-lab.git libs/habitat-lab && cd libs/habitat-lab && git checkout v0.2.4) || echo 'habitat-lab already cloned'
+"""
+
+# Install both habitat-sim and habitat-lab (with --no-build-isolation)
+install-habitat = { cmd = """
+cd libs/habitat-sim && rm -rf build/ && pip install . -v --no-build-isolation && \
+cd ../habitat-lab && pip install -e habitat-lab
+""", env = { WITH_BULLET = "1", HEADLESS = "1", CMAKE_POLICY_VERSION_MINIMUM = "3.5" } }
+
+# Combined task for convenience
+setup-habitat = { depends-on = ["clone-habitat", "install-habitat"] }
+
+# Clean up everything to start fresh
+clean-habitat = """
+rm -rf libs/habitat-sim libs/habitat-lab && \
+pip uninstall habitat-sim habitat-lab habitat -y || true && \
+pip cache purge || true && \
+rm -rf /tmp/pip-* || true && \
+echo 'Cleaned up habitat-sim and habitat-lab'
+"""
+
+# Full reinstall from scratch
+reinstall-habitat = { depends-on = ["clean-habitat", "setup-habitat"] }
+
+# Install PyG extensions using pre-built wheels (runs AFTER pixi install)
+install-pyg = "pip install torch-cluster torch-scatter torch-sparse -f https://data.pyg.org/whl/torch-2.5.1+cu118.html"
+
+# Install mast3r requirements (but skip opencv since we use conda's)
+install-mast3r = """
+pip install -r libs/matcher/mast3r/requirements.txt && \
+pip install -r libs/matcher/mast3r/dust3r/requirements.txt && \
+pip install -r libs/matcher/mast3r/dust3r/requirements_optional.txt && \
+pip uninstall opencv-python opencv-python-headless -y || true
+"""
+
+# Install ROS packages (separate index)
+install-ros = "pip install rosbag roslz4 --extra-index-url https://rospypi.github.io/simple/"
+
+# Install warmup scheduler from git
+install-warmup-scheduler = "pip install git+https://github.com/ildoonet/pytorch-gradual-warmup-lr.git"
+
+# # Fix opencv - ensure we use conda's version, not pip's
+# fix-opencv = """
+# pip list | grep -i opencv && \
+# echo 'Uninstalling any pip-installed opencv...' && \
+# pip uninstall opencv-python opencv-python-headless opencv-contrib-python -y 2>/dev/null || \
+# echo 'No pip opencv found (using conda version - this is correct!)'
+# """
+
+# Verify installation
+verify = """
+python -c "
+import numpy as np
+print(f'NumPy: {np.__version__}')
+assert np.__version__.startswith('1.26'), f'NumPy must be 1.26.x, got {np.__version__}'
+
+import habitat_sim
+print(f'habitat_sim: {habitat_sim.__version__}')
+print(f'Bullet physics: {habitat_sim.built_with_bullet}')
+
+# Test CameraSensorSpec (the problematic class)
+spec = habitat_sim.CameraSensorSpec()
+spec.uuid = 'test'
+print('CameraSensorSpec: OK')
+
+import torch
+print(f'PyTorch: {torch.__version__}')
+print(f'CUDA available: {torch.cuda.is_available()}')
+
+import cv2
+print(f'OpenCV: {cv2.__version__}')
+
+print('\\n✅ All checks passed!')
+"
+"""
+
+# ============================================================
+# FULL INIT - Run this after fresh 'pixi install'
+# ============================================================
+# Order: habitat (sim+lab) -> pyg -> mast3r -> ros -> warmup -> verify
+init = { depends-on = ["setup-habitat"], cmd = """
+echo '=== Step 2/6: Installing PyG extensions ===' && \
+pixi run install-pyg && \
+echo '=== Step 3/6: Installing MASt3R requirements ===' && \
+pixi run install-mast3r && \
+echo '=== Step 4/6: Installing ROS packages ===' && \
+pixi run install-ros && \
+echo '=== Step 5/6: Installing warmup scheduler ===' && \
+pixi run install-warmup-scheduler && \
+echo '=== Step 6/6: Verifying installation ===' && \
+pixi run verify && \
+echo '' && \
+echo '============================================' && \
+echo '✅ INIT COMPLETE! Environment is ready.' && \
+echo '============================================'
+""" }
+
+# ============================================================
+# CLEAN ALL - Nuclear option to start completely fresh
+# ============================================================
+clean-all = """
+echo 'Cleaning habitat...' && \
+rm -rf libs/habitat-sim libs/habitat-lab && \
+pip uninstall habitat-sim habitat-lab habitat magnum -y || true && \
+echo 'Cleaning pip cache...' && \
+pip cache purge || true && \
+rm -rf /tmp/pip-* || true && \
+echo 'Done! Now run: rm -rf .pixi/ pixi.lock && pixi install && pixi run init'
+"""
+
+[dependencies]
+python = "3.10.*"
+cmake = ">=3.14"
+ninja = "*"
+git = "*"
+pip = ">=26.0.1,<27"
+
+# Pin NumPy to 1.26.x for habitat-sim compatibility
+numpy = ">=1.26,<1.27"
+
+# C++ standard library - ensure consistent version
+libstdcxx-ng = ">=12"
+
+# Build dependencies that habitat-sim needs
+eigen = "*"
+bullet = "*"
+libgl = "*"
+libglu = "*"
+python-blosc2 = ">=2.7.1,<3"
+networkx = ">=3.4.2,<4"
+tqdm = ">=4.67.1,<5"
+hydra-core = ">=1.3.2,<2"
+opencv = ">=4.12.0,<4.13"
+natsort = ">=8.4.0,<9"
+yacs = ">=0.1.8,<0.2"
+ipykernel = ">=7.2.0,<8"
+
+[pypi-options]
+extra-index-urls = ["https://download.pytorch.org/whl/cu118"]
+index-strategy = "unsafe-best-match"
+
+[pypi-dependencies]
+torch = "==2.5.1"
+torchvision = "==0.20.1"
+torch-geometric = "==2.6.1"
+torchmetrics = "==1.7.0"
+opencv-python = ">=4.10.0,<4.13"
+
+# mast3r/dust3r core deps
+roma = "*"
+matplotlib = "*"
+scipy = "*"
+einops = "*"
+trimesh = "*"
+tensorboard = "*"
+pyglet = "<2"
+scikit-learn = "*"
+
+# Updated diffusers and compatible huggingface-hub
+huggingface-hub = ">=0.22"
+diffusers = ">=0.21.0"
+gradio = "*"
+
+# dust3r optional deps
+pillow-heif = "*"
+kapture = "*"
+kapture-localization = "*"
+numpy-quaternion = "*"
+poselib = "*"
+
+# utilities
+py3-wget = "*"
+
+# new deps
+transformers = "*"
+shapely = "*"
+faiss-cpu = "*"
+asmk = "*"
+simplejson = "*"
+fvcore = "*"
+timm = "*"
+
+# git-installed packages
+clip = { git = "https://github.com/ultralytics/CLIP.git", rev = "a6238961f9fab312d99c7709f8c7485b3f9a9b50" }
+lightglue = { git = "https://github.com/cvg/LightGlue.git", rev = "746fac2c042e05d1865315b1413419f1c1e7ba55" }
+timesformer = { git = "https://github.com/facebookresearch/TimeSformer.git", rev = "a5ef29a7b7264baff199a30b3306ac27de901133" }
+
+# visual nav transformer deps
+h5py = "*"
+wandb = "*"
+prettytable = "*"
+efficientnet-pytorch = "*"
+warmup-scheduler = "*"
+lmdb = "*"
+vit-pytorch = "*"
+positional-encodings = { version = "*", extras = ["pytorch"] }

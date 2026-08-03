@@ -1,0 +1,18 @@
+# Offline visualization config - everything enabled by default
+
+render_visualizations:
+  enabled: true
+  online: true  # Force rendering
+  rgb_images: true
+  depth_images: true
+  costmap_heatmaps: true
+  match_vis: false  # Not implemented
+  topdown_trajectory: true
+  topdown_meters_per_pixel: 0.025
+  combined_step_vis: true  # 3-panel combined view
+
+offline_vis:
+  create_videos: true        # Create videos from frames
+  video_fps: 5               # FPS for generated videos
+  videos_only: false         # If true, skip frame rendering and just create videos
+

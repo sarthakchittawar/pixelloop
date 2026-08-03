@@ -1,0 +1,5 @@
+name: mast3r
+resize_h: 240
+resize_w: 320
+subsample_or_initxy1: 4
+geometric_verification: true

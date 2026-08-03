@@ -1,0 +1,161 @@
+# required paths
+path_dataset: './data/'
+path_models: ''
+path_results: './out/results_tmp/'
+
+# episode/task settings
+start_idx: 0
+step_idx: 1
+end_idx: 108
+reverse: False
+task_type: "original" # from ["original", "alt_goal", "via_alt_goal"]
+use_gt_localization: False
+env: "sim" # from ["sim", "real"]
+
+split: "val" # from ["train", "val"]
+threshold_goal_distance: 1.0
+max_start_distance: "easy" # from ["easy", "hard", "full"]
+max_steps: 500
+
+exp_name: "GTM_tango"
+
+# running from list of winners or failure or no good
+run_list: '' #'winners'  #  ['', 'winners', 'failures', 'no_good']
+path_run: ''
+
+# controller and mapping params
+method: 'robohop+'
+segmentor: 'sim' # [sim, fast_sam, sam, sam2, sam21]
+goal_source: 'gt_metric'  # [gt_metric, gt_topological, gt_topometric, topological]
+graph_filename: null
+infer_depth: False
+infer_traversable: False
+
+# logging and display
+log_wandb: False
+log_robot: True
+debug: False
+except_exit: False # set True to disable try/except, print traceback, & exit
+
+# tango's visualization panel
+plot: False
+save_vis: False
+# dump_episode_images: 0
+
+cull_qry_instances: False
+cull_map_instances: False
+cull_map_method: 'sim' # from ['sim', 'fast_sam']
+
+sim:
+  hfov: 120
+  width: 320
+  height: 240
+  sensor_height: 0.4 # [0.4, 1.31, 1.5]
+  sensor_height_map: 1.31
+
+episode_blacklists:
+  all_tasks: [
+    'CrMo8WxCyVb_0000016_chair_411_',
+    'LT9Jq6dN3Ea_0000000_tv_monitor_21_',
+    'Nfvxx8J5NCo_0000009_bed_267_',
+    'k1cupFYWXJ6_0000000_sofa_19_',
+    'k1cupFYWXJ6_0000008_chair_594_',
+    'VBzV5z6i1WS_0000000_tv_monitor_43_',
+    # SG: Tricky to judge for ignoring:
+    # 'XB4GS9ShBRE_0000000_tv_monitor_8_',
+  ]
+  original: []
+  original_reverse: [
+    # Could not find goalNodeIdx:
+    # "q5QZSEeHe5g_0000000_plant_32_",
+    # "yr17PDCnDDW_0000000_plant_32_",
+    # Goal is full frame:
+    "GLAQ4DNUx5U_0000000_plant_22_",
+    # Goal is incorrect:
+    "6s7QHgap2fW_0000000_tv_monitor_34_",
+    # Could not find a valid start state:
+    "svBbv1Pavdk_0000000_plant_7_",
+    # Entire floor of a room is the goal (already globally ignored):
+    "LT9Jq6dN3Ea_0000000_tv_monitor_21_",
+  ]
+  alt_goal_v2: [
+    # SG review (updated):
+    "5cdEh9F2hJL_0000000_toilet_36_",
+    "7MXmsvcQjpJ_0000000_chair_16_",
+    "CrMo8WxCyVb_0000000_toilet_33_",
+    "DYehNKdT76V_0000000_toilet_115_",
+    "TEEsavR23oF_0000000_tv_monitor_10_",
+    "VBzV5z6i1WS_0000000_tv_monitor_43_",
+    "XB4GS9ShBRE_0000000_tv_monitor_8_",
+    "a8BtkwhxdRV_0000000_toilet_18_",
+    "q3zU7Yy5E5s_0000000_bed_23_",
+    # DC Review:
+    # Could not find goalNodeIdx:
+    # "6s7QHgap2fW_0000000_tv_monitor_34_",
+    # "BAbdmeyTvMZ_0000000_chair_68_",
+    # "Nfvxx8J5NCo_0000000_tv_monitor_31_",
+    # "VBzV5z6i1WS_0000000_tv_monitor_43_",
+    # "mL8ThkuaVTM_0000000_bed_26_",
+    # "mv2HUxq3B53_0000000_chair_71_",
+    # Agent reaches goal, but cannot succeed due to goal height/obstacles:
+    "Dd4bFSTQ8gi_0000000_sofa_9_",
+    # Goal is in a different room that would barely be visible to any agent:
+    "qyAac8rV8Zk_0000000_tv_monitor_8_",
+  ]
+  via_alt_goal: [
+    # Could not find goalNodeIdx:
+    # "q5QZSEeHe5g_0000000_plant_32_",
+    # Cost image is blank:
+    # "HY1NcmCgn3n_0000000_plant_4_",
+    # Bedside is non-traversible:
+    # "7MXmsvcQjpJ_0000000_chair_16_",
+    # Goal is large sofa, which can be reached but still fail if on the wrong side:
+    "BAbdmeyTvMZ_0000000_chair_68_",
+    # Start of episode presents a see-through wall:
+    "MHPLjHsuG27_0000000_tv_monitor_17_",
+    # Missing agent_states.npy:
+    "a8BtkwhxdRV_0000000_toilet_18_",
+    # Non-traversible area on way to goal:
+    "cvZr5TUy5C5_0000000_chair_31_",
+    # Start faces a wall at a dead end:
+    "yr17PDCnDDW_0000000_plant_32_",
+    # Alt goal is on the way:
+    "5cdEh9F2hJL_0000000_toilet_36_",
+    "Dd4bFSTQ8gi_0000000_sofa_9_",
+  ]
+
+goal_gen:
+  textLabels: [] #["floor", "ceiling", "ground"] # from [[], <list of labels to remove>
+
+  # matcher
+  matcher_name: "lightglue" # used during loc [lightglue, sam2, superpoint-lg ...]
+  map_matcher_name: "lightglue" # used during mapping [lightglue, sam2]
+  geometric_verification: True # this has no effect if matcher_name is lightglue
+  match_area: False
+
+  # planner
+  edge_weight_str: null #["margin", "geodesic_(max,min,avg)", "e3d", null (=None in python)]
+  goalNodeIdx: null
+  use_goal_nbrs: True
+  plan_da_nbrs: True
+  preplan_to_goals_only: False
+  rewrite_graph_with_allPathLengths: False
+
+  # localizer
+  loc_radius: 4
+  subsample_ref: 1
+  reloc_rad_add: 2
+  reloc_rad_max: 15
+  min_num_matches: 0
+  localizedImgIdx: 0
+
+  # tracker
+  do_track: False
+
+controller:
+  config_file: "configs/gnm_test.yaml"
+  # following only used with real_remote
+  v_min: 0.05
+  v_max: 0.2
+  w_min: -0.3
+  w_max: 0.3

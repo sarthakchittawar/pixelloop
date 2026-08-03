@@ -1,0 +1,15 @@
+[submodule "libs/matcher/mast3r"]
+	path = libs/matcher/mast3r
+	url = https://github.com/naver/mast3r.git
+[submodule "libs/control/visualnav_transformer"]
+	path = libs/control/visualnav_transformer
+	url = https://github.com/Indoor-Seg-VLoc/visualnav-transformer.git
+[submodule "libs/habitat-lab"]
+	path = libs/habitat-lab
+	url = https://github.com/facebookresearch/habitat-lab.git
+[submodule "libs/habitat-sim"]
+	path = libs/habitat-sim
+	url = https://github.com/facebookresearch/habitat-sim.git
+[submodule "libs/loop_closure/TimeSformer"]
+	path = libs/loop_closure/TimeSformer
+	url = https://github.com/facebookresearch/TimeSformer.git
