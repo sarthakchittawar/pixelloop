@@ -1,0 +1,201 @@
+# load_run: /hpcfs/users/a1232719/data/models/navigation/visualnav_transformer/gnm/
+
+# load_run: /hpcfs/users/a1232719/workspace/visualnav-transformer/train/logs/vnav/gnm_2024_10_16_12_24_46_hm3d_GMask_GTM_D8/
+# load_run: /hpcfs/users/a1232719/workspace/visualnav-transformer/train/logs/relevant/gnm_2024_10_14_17_49_11_hm3d_GMask_goalPL2
+# load_run: /hpcfs/users/a1232719/workspace/visualnav-transformer/train/logs/vnav/gnm_2024_10_16_11_29_17_hm3d_GMask_GTTM
+# load_run: /hpcfs/users/a1232719/workspace/visualnav-transformer/train/logs/vnav/gnm_2024_10_17_01_05_34_hm3d_GMask_GTTM_PL2
+# load_run: /hpcfs/users/a1232719/workspace/visualnav-transformer/train/logs/vnav/gnm_2024_10_23_17_00_40_hm3d_GMask_GTM_LTP10/
+# load_run: /hpcfs/users/a1232719/workspace/visualnav-transformer/train/logs/vnav/gnm_2024_10_24_11_43_19_hm3d_GMask_GTTM_LTP10/
+# load_run: /hpcfs/users/a1232719/workspace/visualnav-transformer/train/logs/vnav/gnm_2024_10_23_23_49_06_hm3d_GMask_GTTM_PL2_LTP10/
+# load_run: /hpcfs/users/a1232719/workspace/visualnav-transformer/train/logs/vnav/gnm_2024_11_03_00_13_15_hm3d_GMask_GTTL_LTP10/
+# load_run: /hpcfs/users/a1232719/workspace/visualnav-transformer/train/logs/vnav/gnm_2024_11_05_00_03_05_hm3d_GMask_fastsam/
+#load_run: /hpcfs/users/a1232719/workspace/visualnav-transformer/train/logs/vnav/gnm_2024_11_13_23_51_47_hm3d_GMask_GTTL/
+# load_run: /hpcfs/users/a1232719/workspace/visualnav-transformer/train/logs/vnav/gnm_2024_11_13_10_49_38_hm3d_base_LTP10/
+# load_run: /hpcfs/users/a1232719/workspace/visualnav-transformer/train/logs/vnav/gnm_2024_11_20_17_12_09_hm3d_GMask_GTTM_D8_ObsNone/
+# load_run: /hpcfs/users/a1232719/workspace/visualnav-transformer/train/logs/vnav/gnm_2024_12_02_10_37_35_hm3d_GMask_sam21_ObsNone_D8
+# load_run: /hpcfs/users/a1232719/workspace/visualnav-transformer/train/logs/vnav/gnm_2024_12_07_20_34_36_hm3d_GMask_sam21_e3d_max_ObsNone
+# load_run: /hpcfs/users/a1232719/workspace/visualnav-transformer/train/logs/vnav/gnm_2024_12_18_23_58_43_hm3d_GMask_sam21emax_C5_ObsNone/
+# load_run: /hpcfs/users/a1232719/workspace/visualnav-transformer/train/logs/vnav/gnm_2024_12_18_23_56_52_hm3d_GMask_GTTM_C5_ObsNone/
+# load_run: /hpcfs/users/a1232719/workspace/visualnav-transformer/train/logs/vnav/gnm_2024_12_22_11_41_34_hm3dBB3_GTTM_ObsNone/
+# load_run: /hpcfs/users/a1232719/workspace/visualnav-transformer/train/logs/vnav/gnm_2024_12_23_22_05_47_hm3d_base_BB3/
+
+# load_run: /hpcfs/users/a1232719/workspace/visualnav-transformer/train/logs/vnav/gnm_2024_12_24_19_50_48_hm3dBB3Sh4_GTTM_ObsNone/
+
+# load_run: /hpcfs/users/a1232719/workspace/visualnav-transformer/train/logs/vnav/gnm_2024_12_24_23_29_14_hm3d_base_BB3Sh4/
+# load_run: /hpcfs/users/a1232719/workspace/visualnav-transformer/train/logs/vnav/gnm_2024_12_25_18_38_42_hm3dBB3Sh4_GTTM_WithObs/
+# load_run: /hpcfs/users/a1232719/workspace/visualnav-transformer/train/logs/vnav/gnm_2024_12_25_23_48_32_hm3dBB3Sh4_GTTM_NoDists/
+# load_run: /hpcfs/users/a1232719/workspace/visualnav-transformer/train/logs/vnav/gnm_2024_12_26_11_17_31_hm3dBB3Sh4_GTTM_D1/
+
+# load_run: /hpcfs/users/a1232719/workspace/visualnav-transformer/train/logs/vnav/gnm_2025_04_07_12_03_58_hm3dBB3Sh4_GTTM_ObsNone_perturb0.3/
+# load_run: /hpcfs/users/a1232719/workspace/visualnav-transformer/train/logs/vnav/gnm_2025_04_07_15_53_39_hm3dBB3Sh4_GTTM_ObsNone_perturb0.5/
+# load_run: /hpcfs/users/a1232719/workspace/visualnav-transformer/train/logs/vnav/gnm_2025_04_07_23_19_14_hm3dBB3Sh4_GTTM_ObsNone_perturb0.3RFI/
+# load_run: /hpcfs/users/a1232719/workspace/visualnav-transformer/train/logs/vnav/gnm_2025_04_07_13_14_49_hm3dBB3Sh4_GTTM_ObNone_perturn0.3_goalContext/
+# load_run: /hpcfs/users/a1232719/workspace/visualnav-transformer/train/logs/vnav/gnm_2025_04_07_22_02_45_hm3dBB3Sh4_GTTM_ObsNone_maskCrop0.8/
+
+## END SLACK 10
+# load_run: /hpcfs/users/a1232719/workspace/visualnav-transformer/train/logs/vnav/gnm_2025_04_10_00_49_01_hm3dBB3Sh4ES10_GTTM_ObNone/
+# load_run: /hpcfs/users/a1232719/workspace/visualnav-transformer/train/logs/vnav/gnm_2025_04_19_23_14_37_hm3dBB3ES10_GTTM_ObNone_perturb0.3/
+# load_run: /hpcfs/users/a1232719/workspace/visualnav-transformer/train/logs/vnav/gnm_2025_04_21_00_21_39_hm3dBB3Sh4ES10_GTTM_withObs_perturb0.3/
+# load_run: /hpcfs/users/a1232719/workspace/visualnav-transformer/train/logs/vnav/gnm_2025_04_21_03_30_49_hm3dBB3Sh4ES10_GTTM_ObNone_pert0.3_maskGrad/
+
+# Orig?:
+# load_run: /home/dc/sg/visualnav-transformer/train/logs/vnav/old/gnm_2025_04_10_00_52_20_hm3dBB3Sh4ES10_GTTM_ObNone_perturb0.3/
+# load_run: /scratch/vineeth.bhat/train/logs/vnav/gnm_2024_12_24_19_50_48_hm3dBB3Sh4_GTTM_ObsNone
+
+# For Phoenix Server
+# load_run: /scratch/toponavgroup/indoor-topo-loc/experiments/objreact_experiments/checkpoints/gnm_2025_04_10_00_52_20_hm3dBB3Sh4ES10_GTTM_ObNone_perturb0.3
+# new one:
+# load_run: /scratch/toponavgroup/indoor-topo-loc/experiments/objreact_experiments/checkpoints/gnm_2025_09_06_01_32_01_waypixel_bigger_bot0.3-sh0.4_habsam2
+
+## New pixelwise controller trained on old trajectories (Taken from the spectre trained checkpoint)
+# load_run: /scratch/toponavgroup/indoor-topo-loc/experiments/objreact_experiments/checkpoints/gnm_2025_08_27_01_44_21_
+
+# For Orion Server
+# load_run: /scratch/vanshg/experiments/objreact_experiments/checkpoints/gnm_2025_04_10_00_52_20_hm3dBB3Sh4ES10_GTTM_ObNone_perturb0.3
+
+# For Spectre run
+## Original mask-level learnt controller on corl trajectories (big-bot)
+# load_run: /home/onyx/work_dirs/vanshg/navigation/sg_habitat/libs/control/visualnav_transformer/train/logs/gnm_2025_04_10_00_52_20_hm3dBB3Sh4ES10_GTTM_ObNone_perturb0.3
+
+## New pixelwise controller trained on old trajectories
+# load_run: /home/onyx/work_dirs/vanshg/navigation/sg_habitat/libs/control/visualnav_transformer/train/logs/vnav/gnm_2025_08_27_01_44_21_
+
+## New pixelwise Controller trained on old trajectories and initialized from old controller checkpoint and no resume optimizer
+# load_run: /home/onyx/work_dirs/vanshg/navigation/sg_habitat/libs/control/visualnav_transformer/train/logs/vnav/gnm_2025_08_27_15_10_43_waypixel_hm3d_iin_train_old_traj_resume_hm3dBB3Sh4ES10_no_resume_optimizer
+
+## Old waymask controller trained by vanshg on old trajectories
+# load_run: /home/onyx/work_dirs/vanshg/navigation/sg_habitat/libs/control/visualnav_transformer/train/logs/vnav/gnm_2025_08_25_02_08_54_
+
+## PixelLoop controller checkpoint. This directory must contain latest.pth.
+load_run: checkpoints/gnm_mast3r_nav
+
+# DC models:
+# Obj
+# load_run: /home/dc/sg/visualnav-transformer/train/logs/vnav/gnm_2025_04_24_15_02_55_test_stacked_context_2_hm3dBB3Sh4ES10_GTTM_ObNone_perturb0.3/
+# load_run: /home/dc/sg/visualnav-transformer/train/logs/vnav/object_relative/gnm_2025_04_26_11_10_16_dc_object_relative_context_size_0
+
+# KEY PARAMS
+predict_dists: True
+goal_type: "image_mask_enc" # ["image", "disabled", "image_mask_enc"]
+goal_value_granularity: "pixel"
+# goal_value_granularity: "mask"
+goal_use_pl: 1 # if 1/2, use pl/pl2 weights to encode masks of 'curr img' else (0) use dino-pca ft of 'goal img'
+obs_type: "disabled" # ["image", "disabled", "image_mask_enc"]
+dims_segFt: 8
+precomp: 2
+goal_uses_context: False
+goal_uses_stacked_context: False
+is_pl_normalized: False
+use_vel_filter: True
+use_mask_grad: False
+
+# navigation params, from deployment/src/navigate.py
+close_threshold: 3
+loc_radius: 4
+waypoint_index: 5
+fixed_plan: False
+
+# model params
+model_type: gnm
+obs_encoding_size: 1024
+goal_encoding_size: 1024
+
+# normalization for the action space
+normalize: True
+
+# context
+context_type: temporal # [temporal, randomized]
+context_size: 5
+
+# tradeoff between action and distance prediction loss
+alpha: 0.5
+
+# distance bounds for distance and action and distance predictions
+distance:
+    min_dist_cat: 0
+    max_dist_cat: 20
+action:
+    min_dist_cat: 2
+    max_dist_cat: 10
+close_far_threshold: 10 # distance threshold used to seperate the close and the far  subgoals that are sampled per datapoint
+
+# action output params
+len_traj_pred: 10
+learn_angle: True
+
+# dataset specific parameters
+image_size: [85, 64] # width, height
+
+# if goal_type is "image_mask_enc"
+# graphs_path: /home/sourav/workspace/s/sg_habitat/out/RoboHop/
+# graphs_path: /hpcfs/users/a1232719/data/processed/navigation/
+
+datasets:
+    # recon:
+    #   data_folder: /home/<username>/vint_dataset/recon
+    #   train: /home/<username>/data_splits/recon/train/ # path to train folder with traj_names.txt
+    #   test: /home/<username>/data_splits/recon/test/ # path to test folder with traj_names.txt
+    #   end_slack: 3 # because many trajectories end in collisions
+    #   goals_per_obs: 1 # how many goals are sampled per observation
+    #   negative_mining: True # negative mining from the ViNG paper (Shah et al.)
+    # go_stanford:
+    #   data_folder: /hpcfs/users/a1232719/data/navigation/go_stanford
+    #   train: ./vint_train/data/data_splits/go_stanford/train/
+    #   test: ./vint_train/data/data_splits/go_stanford/test/
+    #   end_slack: 0
+    #   goals_per_obs: 2 # increase dataset size
+    #   negative_mining: True
+    hm3d_iin_train:
+        data_folder: /hpcfs/users/a1232719/data/navigation/hm3d_iin_train
+        train: ./vint_train/data/data_splits/hm3d_iin_train/train/
+        test: ./vint_train/data/data_splits/hm3d_iin_train/test/
+        end_slack: 0
+        goals_per_obs: 2 # increase dataset size
+        negative_mining: True
+        images_subfolder: images
+    # cory_hall:
+    #   data_folder: /home/<username>/vint_dataset/cory_hall/
+    #   train: /home/<username>/data_splits/cory_hall/train/
+    #   test: /home/<username>/data_splits/cory_hall/test/
+    #   end_slack: 3 # because many trajectories end in collisions
+    #   goals_per_obs: 1
+    #   negative_mining: True
+    # tartan_drive:
+    #   data_folder: /home/<username>/vint_dataset/tartan_drive/
+    #   train: /home/<username>/data_splits/tartan_drive/train/
+    #   test: /home/<username>/data_splits/tartan_drive/test/
+    #   end_slack: 3 # because many trajectories end in collisions
+    #   goals_per_obs: 1
+    #   negative_mining: True
+    # sacson:
+    #   data_folder: /home/<username>/vint_dataset/sacson/
+    #   train: /home/<username>/data_splits/sacson/train/
+    #   test: /home/<username>/data_splits/sacson/test/
+    #   end_slack: 3 # because many trajectories end in collisions
+    #   goals_per_obs: 1
+    #   negative_mining: True
+
+    # private datasets (uncomment if you have access)
+    # seattle:
+    #   data_folder: /home/<username>/vint_dataset/seattle/
+    #   train: /home/<username>/data_splits/seattle/train/
+    #   test: /home/<username>/data_splits/seattle/test/
+    #   end_slack: 0
+    #   goals_per_obs: 1
+    #   negative_mining: True
+    # scand:
+    #   data_folder: /home/<username>/vint_dataset/scand/
+    #   train: /home/<username>/data_splits/scand/train/
+    #   test: /home/<username>/data_splits/scand/test/
+    #   end_slack: 0
+    #   goals_per_obs: 1
+    #   negative_mining: True
+
+# logging stuff
+## =0 turns off
+print_log_freq: 100 # in iterations
+image_log_freq: 1000 # in iterations
+num_images_log: 8 # number of images to log in a logging iteration
+pairwise_test_freq: 20 # in epochs
+wandb_log_freq: 10 # in iterations
+eval_freq: 1 # in epochs

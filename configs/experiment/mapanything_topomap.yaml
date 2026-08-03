@@ -1,0 +1,29 @@
+# @package _global_
+# Experiment config for creating topomaps using MapAnything pointmaps + matches
+
+model:
+  depth_source: "mapanything"       # Use MapAnything camera-frame pointmaps for depth
+  use_gt_matches: true              # Use precomputed matches (skip 2D matcher)
+  gt_matches_filename: "mapanything_matches_320x240.pkl"   # In scene/gt_matches/
+
+graph:
+  enable_loop_closure: true
+  loop_closure_mode: "mapanything"  # Use mapanything_loops.txt
+
+scenes:
+  base_dir: "data/hm3d-0.2/benchmarking"
+  multi_scene: true
+  base_out_dir: "data/hm3d-0.2/benchmarking"
+  scene_list_file: null
+  start_idx: 0
+  end_idx: -1
+  step: 1
+  costmap_dirname: "topo_map_mapanything"
+
+goal:
+  mode: "none"
+  compute_costmaps: false
+
+processing:
+  force_recompute_graph: true
+  recreate_graphs: true

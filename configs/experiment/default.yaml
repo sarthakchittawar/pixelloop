@@ -1,0 +1,40 @@
+# @package _global_
+# Default experiment configuration for navigation tasks
+
+# exp_name: "benchmark_val_scenes_loc_rad4_subsample_ref1"
+exp_name: "benchmark_default"
+
+# Task configuration
+task_type: "original"  # Options: "original", "alt_goal", "alt_goal_v2"
+reverse: false         # If true, navigate to start position (reverse navigation)
+
+costmap_base_dir: data/hm3d-0.2/benchmarking
+costmap_filename: costmaps_320x240_EC_EMST_SINGLE_NC_NONE_NCF_10_goalImg104.npz
+costmap_dirname: "topo_map_outputs" # Subdirectory for costmaps (if using costmap_base_dir)
+
+# Start state configuration
+# Modes: "random" - sample random navigable points
+#        "trajectory" - select from recorded trajectory at target distance from goal
+#        "fixed_idx" - use specific trajectory index (set start_idx)
+start_state_mode: "fixed_idx"
+num_random_iterations: 5   # Number of random starts (only for random mode)
+start_indices: []   # or read from start_states.json instead
+max_start_distance: "hard"       # "easy" (3m), "hard" (5m), "full", or numeric value
+max_steps: 750
+
+# Goal/Success configuration
+goal_distance_threshold: 0.5     # meters - distance to goal for success
+goal_position_method: "trajectory"  # "trajectory" (from agent states) or "projection" (from 3D coords)
+
+# Stuck detection
+use_care_collision_avoidance: true # CARE-based collision avoidance
+collision_recovery: true           # Rotate when stuck
+stuck_threshold: 0.1            # meters - minimum movement to not be considered stuck
+stuck_window: 15                 # steps - window size for stuck detection
+
+# Image/Map dimensions
+image_width: 320
+image_height: 240
+
+# timing manager
+benchmark_functions: false          # Enable timing manager

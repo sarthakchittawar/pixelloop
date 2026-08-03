@@ -1,0 +1,7 @@
+name: superpoint
+resize_h: 240
+resize_w: 320
+geometric_verification: true
+max_keypoints: 2048
+keypoint_threshold: 0.005
+consistent_keypoints: true  # Set to true for consistent 3D points across match pairs

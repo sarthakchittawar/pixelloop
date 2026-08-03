@@ -1,0 +1,11 @@
+# configs/localizer/topological.yaml
+name: topological
+use_gt_localization: True
+loc_radius: 4 # search radius around last localization (submap size)
+subsample_ref: 1 # subsample reference images
+reloc_rad_add: 2
+reloc_rad_max: 15
+min_num_matches: 0
+
+history_size: 8
+greedy_propeller: false

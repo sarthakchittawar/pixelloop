@@ -1,0 +1,8 @@
+# pixi environments
+.pixi/*
+!.pixi/config.toml
+data*
+output*
+benchmarks/*
+**__pycache__
+checkpoints/*

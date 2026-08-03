@@ -1,0 +1,26 @@
+defaults:
+- sim: habitat_default
+- controller: learnt
+- matcher: mast3r
+- planner: topological
+- localizer: topological
+- experiment: default
+- visualization: visualization
+- mapper: mapper_config
+- _self_
+device: cuda
+episode_blacklist: []
+episode_end_idx: -1
+episode_list: []
+episode_list_file: /home/onyx/work_dirs/vanshg/navigation/mast3r-nav/episodes_removing_blacklist.txt
+episode_path: /scratch/toponavgroup/indoor-topo-loc/datasets/p3dx_waypixel_data/hm3d-0.2/benchmarking/1W61QJVDBqe
+episode_start_idx: 0
+episodes_dir: /scratch/toponavgroup/indoor-topo-loc/datasets/p3dx_waypixel_data/hm3d-0.2/benchmarking
+goal_source: topological_pixelwise
+hm3d_root_path: /scratch/toponavgroup/indoor-topo-loc/datasets/p3dx_waypixel_data/hm3d-0.2/benchmarking
+log_results: true
+mast3r_model_path: libs/matcher/mast3r/MASt3R_ViTLarge_BaseDecoder_512_catmlpdpt_metric.pth
+multi_episode: false
+pts3d_source: mast3r
+results_dirpath: /scratch/sarthakc/mast3rnav/sg_habitat/output_new
+save_visualizations: ${visualization.save_raw_data.enabled}

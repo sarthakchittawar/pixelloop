@@ -1,0 +1,124 @@
+# @package _global_
+defaults:
+  - _self_
+
+# Image settings
+image:
+  width: 320
+  height: 240
+  hfov: 90.0  # degrees
+
+# Model settings (for depth estimation)
+model:
+  path: "libs/matcher/mast3r/MASt3R_ViTLarge_BaseDecoder_512_catmlpdpt_metric.pth"
+  device: "cuda"
+  subsample_or_initxy1: 8
+  dist: 'dot' # 'l2', 'dot', null. Note : It runs the KDE tree implementation when dist is null and that runs on CPU
+  block_size: null # 2**13
+  match_feature_type: 'descriptor' # Options: 'descriptor' or 'pointmap' based 3D NN matching
+  use_gt_matches: false  # Set to true for GT mode
+  use_gt_depth: false
+  gt_depth_mode: "png"   # or "raw"
+  retrieval_path: ""  # For MASt3R based loop closure
+  depth_source: "mast3r"  # "mast3r", "gt", or "mapanything"
+  gt_matches_filename: null  # Override matches pkl filename (e.g. "mapanything_matches_320x240.pkl")
+
+# Matcher settings for map creation (2D-2D matching between images)
+map_matcher:
+  name: "mast3r"  # "mast3r" or "superpoint"
+  resize_h: 240
+  resize_w: 320
+  geometric_verification: true
+  # superpoint-specific
+  max_keypoints: 2048
+  keypoint_threshold: 0.005
+
+# Graph construction settings
+graph:
+  # Number of subsequent images each image is matched against
+  inter_image_match_window_size: 3
+  
+  # Edge culling mode: NONE, EMST_SINGLE, DELAUNAY_3D
+  edge_culling_mode: "EMST_SINGLE"
+  
+  # Node culling mode: NONE, FPS
+  node_culling_mode: "NONE"
+  
+  # Node culling factor: keep 1 out of N match pairs
+  node_culling_factor: 10
+
+  enable_loop_closure: true
+  loop_closure_mode: "oracle"  # "oracle", "seqvlad", or "mapanything"
+
+# Processing settings
+processing:
+  # Image subsampling
+  subsample_start_idx: 0
+  subsample_end_idx: null  # null means use all images
+  subsample_step: 1  # Use every Nth image
+  
+  # Force recomputation flags
+  force_recompute_graph: true
+  force_recompute_masks: false
+  
+  # Recreate graphs from scratch (skip graph existence checking)
+  recreate_graphs: false
+  
+  # Copy images to output directory
+  copy_images: false
+
+# Compression settings
+compression:
+  enabled: true
+  chunk_size: 1073741824  # 1GB chunks for large graphs
+
+# Scene settings (unified for single and multi)
+scenes:
+  # Parent directory containing scene subdirectories
+  base_dir: "/scratch/toponavgroup/indoor-topo-loc/datasets/p3dx_waypixel_data/hm3d-0.2/benchmarking"
+  
+  # Toggle between single and multi-scene mode
+  multi_scene: true
+  
+  # Base output directory (optional). If set, outputs go to base_out_dir/scene_name/
+  # If null, outputs go to the scene directory itself
+  base_out_dir: '/scratch/toponavgroup/indoor-topo-loc/datasets/p3dx_waypixel_data/hm3d-0.2/benchmarking'
+  
+  # Single scene mode: scene name (used when multi_scene=false)
+  scene_name: "1W61QJVDBqe"
+  
+  # Multi-scene mode options:
+  scene_list_file: /home/intoponav/workdirs/sarthak/mast3rnav/mast3r-nav/episodes_removing_blacklist.txt   # txt file with scene names (1 per line), takes priority
+  start_idx: 0            # Start index
+  end_idx: -1             # End index (-1 = all)
+  step: 1                 # Process every Nth scene
+
+  costmap_dirname: "topo_map_outputs" # Subdirectory for costmaps (if using costmap_base_dir)
+
+# Goal node settings (for computing distances)
+goal:
+  # Mode: "none", "config", "episode", "update_graph"
+  #   none         - Base graph only, no goal node
+  #   config       - Goal from config (image_idx, pixel_x, pixel_y)
+  #   episode      - Infer goal from episode folder (semantic mask + centroid)
+  #   update_graph - Load existing base graph, add goal from config
+  mode: "none"
+  
+  # For mode="config" or "update_graph": manual goal specification
+  image_idx: 50
+  pixel_x: 160
+  pixel_y: 120
+  
+  # For mode="update_graph": path to existing base graph (relative to scene dir)
+  base_graph_path: null  # e.g., "graph_base_320x240.pkl.b2s"
+  
+  # For mode="episode": task type affects goal parsing
+  task_type: "original"  # or "alt_goal", "alt_goal_v2"
+  
+  # Output control
+  compute_costmaps: true
+
+# Logging
+logging:
+  verbose: true
+  save_debug_info: false
